@@ -8,7 +8,7 @@ export default {
 
     //  Our game entry point (edit as required)
     input: [
-        './src/game.ts'
+        './src/scenes/game.ts'
     ],
 
     //  Where the build file is to be generated.
@@ -17,7 +17,7 @@ export default {
     //  If using Phaser 3.21 or **below**, add: `intro: 'var global = window;'` to the output object.
     output: {
         file: './dist/game.js',
-        name: 'MyGame',
+        name: 'BreadMaze',
         format: 'iife',
         sourcemap: true
     },
@@ -62,7 +62,7 @@ export default {
         serve({
             open: true,
             contentBase: 'dist',
-            host: 'localhost',
+            host: '0.0.0.0',
             port: 10001,
             headers: {
                 'Access-Control-Allow-Origin': '*'
