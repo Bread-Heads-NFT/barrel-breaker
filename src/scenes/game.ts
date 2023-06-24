@@ -2,30 +2,7 @@ import * as Phaser from 'phaser';
 import Player from '../components/player';
 import Controls from '../components/controls/controls';
 
-// const level = [
-//     [0, 0, 0, 0, 0, 2, 0, 0, 0],
-//     [0, 1, 1, 1, 1, 1, 1, 1, 0],
-//     [0, 0, 0, 1, 0, 1, 0, 1, 0],
-//     [0, 1, 1, 1, 0, 1, 0, 1, 0],
-//     [0, 1, 0, 1, 0, 1, 0, 0, 0],
-//     [0, 1, 0, 1, 0, 1, 1, 1, 0],
-//     [0, 0, 0, 0, 0, 1, 0, 1, 0],
-//     [0, 1, 1, 1, 1, 1, 0, 1, 0],
-//     [0, 0, 0, 0, 3, 0, 0, 0, 0]
-// ];
-
 const TILE_SIZE = 64;
-
-function find_tile(tiles: Phaser.Tilemaps.Tile[][], value: number): [number, number] {
-    for (let row of tiles) {
-        for (let tile of row) {
-            if (tile.index === value) {
-                return [tile.x, tile.y];
-            }
-        }
-    }
-    return [-1, -1];
-}
 
 export default class Game extends Phaser.Scene {
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -48,6 +25,7 @@ export default class Game extends Phaser.Scene {
         console.log(level_name);
         this.load.json('level', `assets/mazes/${level_name}`);
         this.load.image('tiles', 'assets/Tiles.png');
+        this.load.image('controls', 'assets/Controls.png')
         this.load.spritesheet('player', 'assets/Player.png', { frameWidth: 32, frameHeight: 32 });
     }
 
@@ -64,11 +42,11 @@ export default class Game extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
-        this.input.addPointer(1);
+        // this.input.addPointer(1);
         this.cursors = this.input.keyboard.createCursorKeys();
         this.controls = new Controls(this);
 
-        const [x, y] = find_tile(layer.layer.data, 2);
+        // const [x, y] = find_tile(layer.layer.data, 2);
         this.entrance = this.map.filterTiles((tile) => tile.index === 2);
         this.player = new Player(
             this,
@@ -92,9 +70,9 @@ export default class Game extends Phaser.Scene {
         if (!this.won) {
             this.physics.world.overlapTiles(this.player, this.exit, (tile: Phaser.Tilemaps.Tile) => {
                 console.log('win');
-                const x = Math.max(10, this.player.x);
+                const x = Math.max(100, this.player.x);
                 const y = Math.max(10, this.player.y);
-                const text = this.add.text(this.player.x, this.player.y, 'You win!', { fontSize: '64px', color: '#F00', strokeThickness: 10 });
+                const text = this.add.text(x, y, 'You win!', { fontSize: '64px', color: '#F00', strokeThickness: 10 });
                 text.setOrigin(0.5, 0.5);
                 this.won = true;
             }, null, this);

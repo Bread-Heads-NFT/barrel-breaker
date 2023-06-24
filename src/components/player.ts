@@ -58,7 +58,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             this.moveRight();
         } else if (cursors.up.isDown || controls.upIsDown) {
             this.moveUp();
-        } else if (cursors.down.isDown/* || controls.rightIsDown*/) {
+        } else if (cursors.down.isDown || controls.downIsDown) {
             this.moveDown();
         } else {
             this.stand();
