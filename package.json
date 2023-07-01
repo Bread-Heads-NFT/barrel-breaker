@@ -28,5 +28,8 @@
         "rollup": "^3.20.2",
         "rollup-plugin-serve": "^2.0.2",
         "typescript": "^5.0.3"
+    },
+    "dependencies": {
+        "@wallet-standard/core": "^1.0.3"
     }
 }

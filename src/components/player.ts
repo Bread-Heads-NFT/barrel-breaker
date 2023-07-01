@@ -11,7 +11,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     SPEED = 200;
     JUMP_SPEED = 600;
     BOUNCE_SPEED = 200;
-    SCALE = 1.5;
+    SCALE = 2;
 
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y, 'player');
@@ -19,6 +19,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         scene.physics.world.enable(this);
         this.body.setCollideWorldBounds(true);
+        this.setGravityY(5000);
+        this.setDepth(1);
+        this.setOrigin(0, 1);
 
         this.scene = scene
 
@@ -52,61 +55,61 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         // }
 
         // controls left & right
-        if (cursors.left.isDown || controls.leftIsDown) {
-            this.moveLeft();
-        } else if (cursors.right.isDown || controls.rightIsDown) {
-            this.moveRight();
-        } else if (cursors.up.isDown || controls.upIsDown) {
-            this.moveUp();
-        } else if (cursors.down.isDown || controls.downIsDown) {
-            this.moveDown();
-        } else {
-            this.stand();
-        }
+        // if (cursors.left.isDown || controls.leftIsDown) {
+        //     this.moveLeft();
+        // } else if (cursors.right.isDown || controls.rightIsDown) {
+        //     this.moveRight();
+        // } else if (cursors.up.isDown || controls.upIsDown) {
+        //     this.moveUp();
+        // } else if (cursors.down.isDown || controls.downIsDown) {
+        //     this.moveDown();
+        // } else {
+        //     this.stand();
+        // }
     }
 
-    moveLeft(): void {
-        if (this.isFrozen) return;
+    // moveLeft(): void {
+    //     if (this.isFrozen) return;
 
-        this.body?.setVelocityX(-this.SPEED);
-        this.body?.setVelocityY(0);
+    //     this.body?.setVelocityX(-this.SPEED);
+    //     this.body?.setVelocityY(0);
 
-        this.anims.play("left", true);
-    }
+    //     this.anims.play("left", true);
+    // }
 
-    moveRight(): void {
-        if (this.isFrozen) return;
+    // moveRight(): void {
+    //     if (this.isFrozen) return;
 
-        this.body?.setVelocityX(this.SPEED);
-        this.body?.setVelocityY(0);
+    //     this.body?.setVelocityX(this.SPEED);
+    //     this.body?.setVelocityY(0);
 
-        this.anims.play("right", true);
-    }
+    //     this.anims.play("right", true);
+    // }
 
-    moveUp(): void {
-        if (this.isFrozen) return;
+    // moveUp(): void {
+    //     if (this.isFrozen) return;
 
-        this.body?.setVelocityX(0);
-        this.body?.setVelocityY(-this.SPEED);
+    //     this.body?.setVelocityX(0);
+    //     this.body?.setVelocityY(-this.SPEED);
 
-        this.anims.play("up", true);
-    }
+    //     this.anims.play("up", true);
+    // }
 
-    moveDown(): void {
-        if (this.isFrozen) return;
+    // moveDown(): void {
+    //     if (this.isFrozen) return;
 
-        this.body?.setVelocityX(0);
-        this.body?.setVelocityY(this.SPEED);
+    //     this.body?.setVelocityX(0);
+    //     this.body?.setVelocityY(this.SPEED);
 
-        this.anims.play("down", true);
-    }
+    //     this.anims.play("down", true);
+    // }
 
-    stand(): void {
-        this.body?.setVelocityX(0);
-        this.body?.setVelocityY(0);
+    // stand(): void {
+    //     this.body?.setVelocityX(0);
+    //     this.body?.setVelocityY(0);
 
-        this.anims.play("stop", true);
-    }
+    //     this.anims.play("stop", true);
+    // }
 
     private createAnimations(scene: Phaser.Scene) {
         scene.anims.create({
@@ -123,29 +126,29 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             frameRate: 8,
             repeat: -1
         });
-        scene.anims.create({
-            key: "left",
-            frames: scene.anims.generateFrameNumbers("player", {
-                frames: [6, 7, 8]
-            }),
-            frameRate: 8,
-            repeat: -1
-        });
-        scene.anims.create({
-            key: "up",
-            frames: scene.anims.generateFrameNumbers("player", {
-                frames: [9, 10, 11]
-            }),
-            frameRate: 8,
-            repeat: -1
-        });
-        scene.anims.create({
-            key: "down",
-            frames: scene.anims.generateFrameNumbers("player", {
-                frames: [0, 1, 2]
-            }),
-            frameRate: 8,
-            repeat: -1
-        });
+        // scene.anims.create({
+        //     key: "left",
+        //     frames: scene.anims.generateFrameNumbers("player", {
+        //         frames: [6, 7, 8]
+        //     }),
+        //     frameRate: 8,
+        //     repeat: -1
+        // });
+        // scene.anims.create({
+        //     key: "up",
+        //     frames: scene.anims.generateFrameNumbers("player", {
+        //         frames: [9, 10, 11]
+        //     }),
+        //     frameRate: 8,
+        //     repeat: -1
+        // });
+        // scene.anims.create({
+        //     key: "down",
+        //     frames: scene.anims.generateFrameNumbers("player", {
+        //         frames: [0, 1, 2]
+        //     }),
+        //     frameRate: 8,
+        //     repeat: -1
+        // });
     }
 }
