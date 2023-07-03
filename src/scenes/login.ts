@@ -37,10 +37,10 @@ export default class Login extends Phaser.Scene {
             icon.on('pointerdown', () => {
                 wallet.features['standard:connect']['connect']().then((res: any) => {
                     console.log(res);
-                    // this.scene.start('Game');
+                    this.scene.start('Game', { wallet: wallet.accounts[0].address });
                 })
             })
         });
-        this.scene.start('Game');
+        // this.scene.start('Game');
     }
 }

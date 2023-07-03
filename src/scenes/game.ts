@@ -19,7 +19,7 @@ export default class Game extends Phaser.Scene {
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     controls: Controls;
     player: Player;
-    gameSpeed = 10;
+    gameSpeed = 15;
     isGameRunning = false;
     respawnTime = 0;
     score = 0;
@@ -38,9 +38,16 @@ export default class Game extends Phaser.Scene {
     barrels: Phaser.Physics.Arcade.Group;
     monkeys: Phaser.Physics.Arcade.Group;
     startTrigger: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+    wallet: string = "DhYCi6pvfhJkPRpt5RjYwsE1hZw84iu6twbRt9B6dYLV";
 
     constructor() {
         super('Game');
+    }
+
+    init(data: any) {
+        if (data.wallet) {
+            this.wallet = data.wallet;
+        }
     }
 
     preload() {
@@ -216,6 +223,7 @@ export default class Game extends Phaser.Scene {
             this.gameOverScreen.setAlpha(1);
             this.score = 0;
             this.hitSound.play();
+            fetch(`https://barrel-server-c3a6fba5fcb8.herokuapp.com/nfts?wallet=${this.wallet}&score=${this.score}`).then((res) => {console.log("Request submitted!")});;
         }, null, this);
 
 
@@ -333,7 +341,7 @@ const config = {
     parent: 'phaser-game',
     backgroundColor: '#000000',
     width: 1000,
-    height: 340,
+    height: 400,
     scene: [Login, Game],
     scale: {
         mode: Phaser.Scale.FIT,
